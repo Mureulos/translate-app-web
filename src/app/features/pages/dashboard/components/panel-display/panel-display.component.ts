@@ -1,13 +1,13 @@
-import { Component, effect, input, ViewEncapsulation } from '@angular/core';
-import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { ReactiveFormsModule, FormControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { LangSelectorComponent } from '../lang-selector/lang-selector.component';
-import { UtilsService } from '../../utils.service';
+import { Component, effect, input, ViewEncapsulation } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { UtilsService } from '@shared/utils.service';
 import { ButtonModule } from 'primeng/button';
+import { LangSelectorComponent } from '../lang-selector/lang-selector.component';
 
 @Component({
   selector: 'app-panel-display',

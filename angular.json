@@ -41,7 +41,12 @@
             "scripts": [],
             "server": "src/main.server.ts",
             "prerender": false,
-            "ssr": false
+            "ssr": false,
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/assets/scss"
+              ]
+            }
           },
           "configurations": {
             "production": {

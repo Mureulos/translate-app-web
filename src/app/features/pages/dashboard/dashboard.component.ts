@@ -1,9 +1,9 @@
 import { Component, inject, signal } from '@angular/core';
-import { TranslationService } from '../../../core/services/translation.service';
-import { PanelDisplayComponent } from "../../../shared/components/panel-display/panel-display.component";
-import { PanelInputComponent } from '../../../shared/components/panel-input/panel-input.component';
-import { LanguageStateService } from '../../../core/services/language-state.service';
-import { TranslationResponse } from '../../../core/types/responses/translate-response';
+import { LanguageStateService } from '@core/services/language-state.service';
+import { TranslationService } from '@core/services/translation.service';
+import { TranslationResponse } from '@core/types/responses/translate-response';
+import { PanelDisplayComponent } from "./components/panel-display/panel-display.component";
+import { PanelInputComponent } from './components/panel-input/panel-input.component';
 
 @Component({
   selector: 'app-dashboard',

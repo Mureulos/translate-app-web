@@ -1,13 +1,11 @@
 import { Component, computed, inject, input, ViewEncapsulation } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { LanguageService } from '../../../core/services/language.service';
-import { LanguageStateService } from '../../../core/services/language-state.service';
-import { LanguageOptions } from '../../../core/types/language.interface';
-import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormsModule } from '@angular/forms';
-import { MenuModule } from 'primeng/menu';
+import { LanguageStateService } from '@core/services/language-state.service';
+import { LanguageService } from '@core/services/language.service';
 import { ButtonModule } from 'primeng/button';
-import { MenuItem } from 'primeng/api';
+import { MenuModule } from 'primeng/menu';
+import { SelectButtonModule } from 'primeng/selectbutton';
 
 @Component({
   selector: 'app-lang-selector',
