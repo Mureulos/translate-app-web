@@ -3,9 +3,11 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { LanguageStateService } from '@core/services/language-state.service';
 import { LanguageService } from '@core/services/language.service';
+import { Language } from '@core/types/responses/translate-response';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { SelectButtonModule } from 'primeng/selectbutton';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-lang-selector',
@@ -19,8 +21,13 @@ export class LangSelectorComponent {
   private _languageService = inject(LanguageService);
   
   public target = input(false);
-  public languages = toSignal(this._languageService.getLanguages(), { initialValue: [] });
 
+  public languages = toSignal(
+    this._languageService.getLanguages().pipe(
+      map(res => res.response)
+    ),
+    { initialValue: [] as Language[] }
+  );
   public menuOptions = computed(() => {
     return this.languages().map(l => ({
       label: l.name,
@@ -36,10 +43,9 @@ export class LangSelectorComponent {
   });
 
   public currentLabel = computed(() => {
-    const currentCode = this.getLanguage();
-
-    const found = this.languages().find(l => l.id === currentCode)
-    return found ? found.name : 'Selecione um idioma'
+    const currentId = this.getLanguage();
+    const found = this.languages().find(l => l.id === currentId);
+    return found ? found.name : 'Select a language';
   });
 
   public setLanguage(idLanguage: number): void {

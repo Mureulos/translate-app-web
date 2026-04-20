@@ -1,3 +1,11 @@
+<figure class="absolute top-0 z-10 w-full">
+    <img src="assets/img/jpg/hero_img.jpg" alt="Banner" class="object-cover w-full h-96" />
+</figure>
+
+<figure class="absolute top-24 z-20 flex justify-center w-full">
+    <img src="assets/img/svg/logo.svg" alt="translate.io" class="h-14" />
+</figure>
+
 <main class="relative z-20 top-60 flex justify-center flex-wrap gap-4 p-8 mx-auto w-full max-w-[1200px]">
   <app-panel-input class="w-full laptop:w-auto laptop:flex-1" (textEvent)="updateText($event)" />
   <app-panel-display class="w-full laptop:w-auto laptop:flex-1" [translation]="translation" />
