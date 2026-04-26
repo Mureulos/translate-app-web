@@ -1,11 +1,12 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
 import { routes } from './app.routes';
 
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { AuthInterceptor } from '@core/auth/interceptor/auth.interceptor';
 import Aura from '@primeng/themes/aura';
 import { MessageService } from 'primeng/api';
 import { providePrimeNG } from 'primeng/config';
@@ -28,6 +29,9 @@ export const appConfig: ApplicationConfig = {
         }
       }
     }),
-    MessageService
+    MessageService,
+    provideHttpClient(
+      withInterceptors([AuthInterceptor])
+    )
   ]
 };
