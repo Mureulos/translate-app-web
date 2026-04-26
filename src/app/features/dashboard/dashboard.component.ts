@@ -6,6 +6,8 @@ import { TranslationService } from '@core/services/translation.service';
 import { TranslationResponse } from '@core/types/responses/translate-response.interface.ts';
 import { UtilsService } from '@shared/utils.service';
 import { MessageService } from 'primeng/api';
+import { ButtonModule } from 'primeng/button';
+import { StepperModule } from 'primeng/stepper';
 import { finalize } from 'rxjs';
 import { PanelDisplayComponent } from "./components/panel-display/panel-display.component";
 import { PanelInputComponent } from './components/panel-input/panel-input.component';
@@ -13,11 +15,12 @@ import { PanelInputComponent } from './components/panel-input/panel-input.compon
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [PanelDisplayComponent, PanelInputComponent],
+  imports: [PanelDisplayComponent, PanelInputComponent, StepperModule, ButtonModule],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
+  public activeStep: number = 1;
   public router = inject(Router);
   public text: string = ''; 
   public sourceLang = signal('en');

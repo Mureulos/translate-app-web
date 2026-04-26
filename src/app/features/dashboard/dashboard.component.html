@@ -40,16 +40,53 @@
   <img src="assets/img/svg/logo.svg" alt="translate.io" class="h-14" />
 </figure>
 
-<main
-  class="relative z-20 top-60 flex items-stretch justify-center flex-wrap gap-4 p-8 mx-auto w-full max-w-[1200px]"
+<p-stepper
+  [(value)]="activeStep"
+  class="relative z-20 top-60 flex flex-col items-center gap-4 p-8 mx-auto w-full max-w-[1200px]"
 >
-  <app-panel-input
-    class="w-full laptop:w-auto laptop:flex-1"
-    (textEvent)="updateText($event)"
-  />
-  <app-panel-display
-    class="w-full laptop:w-auto laptop:flex-1"
-    [translation]="translation"
-    [text]="text"
-  />
-</main>
+  <p-step-panels class="w-full">
+    <p-step-panel [value]="1">
+      <ng-template #content>
+        <div class="wrapper">
+          <div class="flex items-stretch justify-center flex-wrap gap-4 w-full">
+            <app-panel-input
+              class="w-full laptop:w-auto laptop:flex-1"
+              (textEvent)="updateText($event)"
+            />
+
+            <app-panel-display
+              class="w-full laptop:w-auto laptop:flex-1"
+              [translation]="translation"
+              [text]="text"
+            />
+          </div>
+
+          <p-button
+            label="Saved"
+            severity="secondary"
+            (onClick)="activeStep = 2"
+            class="mt-4"
+          />
+        </div>
+      </ng-template>
+    </p-step-panel>
+
+    <p-step-panel [value]="2">
+      <ng-template #content>
+        <div class="wrapper">
+          <div
+            class="flex flex-col items-center gap-4 glass-effect p-8 rounded-xl w-full"
+          >
+            <h2 class="text-2xl font-bold text-white">Step 2</h2>
+          </div>
+
+          <p-button
+            label="Translate"
+            severity="secondary"
+            (onClick)="activeStep = 1"
+          />
+        </div>
+      </ng-template>
+    </p-step-panel>
+  </p-step-panels>
+</p-stepper>
