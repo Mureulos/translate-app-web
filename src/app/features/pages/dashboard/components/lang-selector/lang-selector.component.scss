@@ -29,7 +29,7 @@
     }
 
     .select-button button {
-        border: none;
+        border: 2px solid transparent;
         outline: none;
 
         &:hover, &:active, &:focus {

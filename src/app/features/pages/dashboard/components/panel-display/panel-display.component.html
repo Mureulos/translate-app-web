@@ -1,14 +1,14 @@
-<form class="w-full h-full glass-effect panel-display">
+<form class="relative w-full h-full glass-effect panel-display pb-20">
     <app-lang-selector></app-lang-selector>
 
     <textarea 
         matInput 
         [formControl]="translationControl" 
         readonly 
-        class="font-sans font-semibold h-full"
+        class="font-sans font-semibold cursor-not-allowed select-none"
     ></textarea>
 
-    <div class="flex justify-between items-end max-h-[70px] h-full">
+    <div class="absolute bottom-6 left-6 right-6 flex justify-between items-end">
         <div class="flex gap-2">
             <p-button icon="pi pi-volume-up" />
             <p-button (onClick)="copyText(translationControl.value || '')" icon="pi pi-copy" />

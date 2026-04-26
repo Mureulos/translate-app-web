@@ -1,23 +1,23 @@
-<form class="w-full glass-effect panel-input">
+<form class="flex flex-col h-full w-full glass-effect panel-input">
   <app-lang-selector [target]="true"></app-lang-selector>
 
   <textarea
     matInput
     #message
     [formControl]="translationControl"
-    [maxlength]="500"
+    [maxlength]="300"
     class="font-sans font-semibold"
   ></textarea>
 
   <div class="flex items-end justify-between">
-    <div class="flex items-center gap-2">
+    <div class="flex gap-2">
       <p-button icon="pi pi-volume-up" />
       <p-button (onClick)="copyText(message.value)" icon="pi pi-copy" />
     </div>
 
     <div class="flex flex-col items-end gap-2">
       <mat-hint class="text-xs relative">
-        {{ message.value.length }} / 500
+        {{ message.value.length }} / 300
       </mat-hint>
 
       <button
