@@ -48,13 +48,28 @@ export class LangSelectorComponent {
     return found ? found.name : 'Select a language';
   });
 
+  ngOnInit(): void {
+    const sourceLang = localStorage.getItem('sourceLang');
+    const targetLang = localStorage.getItem('targetLang');
+
+    if (sourceLang)
+      this._languageStateService.setSourceLang(Number(sourceLang));
+
+    if (targetLang)
+      this._languageStateService.setTargetLang(Number(targetLang));
+  }
+
   public setLanguage(idLanguage: number): void {
     if (!idLanguage) return;
 
-    if (this.target() === true)
+    if (this.target() === true) {
       this._languageStateService.setSourceLang(idLanguage);
-    else
+      localStorage.setItem('sourceLang', idLanguage.toString());
+    }
+    else {
       this._languageStateService.setTargetLang(idLanguage);
+      localStorage.setItem('targetLang', idLanguage.toString());
+    }
   }
 
   public swapLanguage(): void {

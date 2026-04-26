@@ -15,10 +15,17 @@
         </div>
 
         @if (authService.isAuthenticated()) {
-          <p-button 
-            (onClick)="favoriteTranslation()"
-            icon="pi pi-star"
-          />
+            @if (this.isFavorited) {
+                <p-button 
+                    (onClick)="deleteFavoriteTranslation()"
+                    icon="pi pi-star-fill"
+                />
+            } @else { 
+                <p-button 
+                  (onClick)="favoriteTranslation()"
+                  icon="pi pi-star"
+                />
+            }
         }
     </div>
 </form>

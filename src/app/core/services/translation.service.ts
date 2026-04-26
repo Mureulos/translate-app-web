@@ -6,44 +6,59 @@ import { API_URL } from '../tokens/api.token';
 import { TranslationResponse } from '../types/responses/translate-response.interface.ts';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class TranslationService {
   private readonly _apiUrl = inject(API_URL);
   private readonly _http = inject(HttpClient);
 
   public translation(
-    text: string, 
-    sourceLanguageId: number, 
-    targetLanguageId: number
+    text: string,
+    sourceLanguageId: number,
+    targetLanguageId: number,
   ): Observable<TranslationResponse> {
     // const params = new HttpParams()
     //   .set('text', text)
     //   .set('sourceLanguageId', sourceLanguageId)
     //   .set('targetLanguageId', targetLanguageId);
 
-    return this._http.post<TranslationResponse>(`${this._apiUrl}translation`, { 
+    return this._http.post<TranslationResponse>(`${this._apiUrl}translation`, {
       text: text,
       sourceLanguageId: sourceLanguageId,
-      targetLanguageId: targetLanguageId 
+      targetLanguageId: targetLanguageId,
     });
   }
 
   public saveTranslation(
-    text: string, 
+    text: string,
     translationText: string,
-    sourceLanguageId: number, 
+    sourceLanguageId: number,
     targetLanguageId: number,
   ): Observable<SaveTranslationResponse> {
-    return this._http.post<SaveTranslationResponse>(`${this._apiUrl}translation/save`, { 
-      text: text,
-      translationText: translationText,
-      sourceLanguageId: sourceLanguageId,
-      targetLanguageId: targetLanguageId 
-    });
+    return this._http.post<SaveTranslationResponse>(
+      `${this._apiUrl}translation/save`,
+      {
+        text: text,
+        translationText: translationText,
+        sourceLanguageId: sourceLanguageId,
+        targetLanguageId: targetLanguageId,
+      },
+    );
   }
 
-  public getSaveTranslation(id?: number): Observable<SaveTranslationResponse | SaveTranslationResponse[] | any> {
-    return this._http.get<SaveTranslationResponse>(`${this._apiUrl}translation/save/${id}`, {});
+  public getSavedTranslation(
+    id?: number,
+  ): Observable<SaveTranslationResponse | SaveTranslationResponse[] | any> {
+    return this._http.get<
+      SaveTranslationResponse | SaveTranslationResponse[] | any
+    >(`${this._apiUrl}translation/save/${id ?? ''}`, {});
   }
-} 
+
+  public deleteSavedTranslation(
+    id?: number,
+  ): Observable<SaveTranslationResponse | SaveTranslationResponse[] | any> {
+    return this._http.delete<
+      SaveTranslationResponse | SaveTranslationResponse[] | any
+    >(`${this._apiUrl}translation/save/${id}`, {});
+  }
+}
