@@ -3,7 +3,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { FormsModule } from '@angular/forms';
 import { LanguageStateService } from '@core/services/language-state.service';
 import { LanguageService } from '@core/services/language.service';
-import { Language } from '@core/types/responses/translate-response';
+import { Language } from '@core/types/responses/translate-response.interface.ts';
 import { ButtonModule } from 'primeng/button';
 import { MenuModule } from 'primeng/menu';
 import { SelectButtonModule } from 'primeng/selectbutton';

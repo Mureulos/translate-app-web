@@ -1,0 +1,27 @@
+@use 'settings' as settings;
+
+form {
+  .btn__login {
+    border: 1px solid settings.$periwinkle-blue;
+    transition: all 0.15s ease-out;
+
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: settings.$periwinkle-blue !important;
+    }
+  }
+
+  .p-inputtext {
+    background-color: white;
+    color: settings.$primary !important;
+    outline-color: settings.$periwinkle-blue !important;
+    border-color: none !important;
+    font-weight: 500;
+  }
+  
+  ::ng-deep .p-inputtext.ng-invalid.ng-dirty {
+    box-shadow: none !important;
+    border-color: transparent !important;
+  }
+}

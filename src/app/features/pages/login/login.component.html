@@ -1,0 +1,61 @@
+<p-toast></p-toast>
+
+<figure class="absolute top-0 z-10 w-full">
+  <img
+    src="assets/img/jpg/login_bg.jpg"
+    alt="Banner"
+    class="object-cover w-full h-dvh"
+  />
+</figure>
+
+<section class="relative z-20 h-dvh w-full p-6 flex items-center justify-center ">
+    <main class="flex flex-col justify-center items-center gap-8 bg-glass-effect border-bright-grey border-1 rounded-sm w-full min-h-[640px] laptop:max-w-[400px] p-4">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col max-w-[310px] w-full justify-center gap-6">
+            <div>
+                <img src="assets/img/svg/devChallenge_icon.svg" alt="Logo">
+                
+                <h1 class="font-bold text-2xl mt-4 text-slate-200">
+                    devChallenges.io
+                </h1>
+
+                <p class="text-sm text-iron mt-1 font-semibold">
+                    Sign in to your account
+                </p>
+            </div>
+        
+            <div class="flex flex-col gap-4 w-full">
+                <div class="flex flex-col">
+                    <label for="username">Email</label>
+                    <input type="email" pInputText placeholder="Email" formControlName="email">
+                </div>
+
+                <div class="flex flex-col">
+                    <label for="username">Password</label>
+                    <input type="password" pInputText placeholder="Password" formControlName="password" class="!bg-white">
+                </div>
+
+                <button 
+                type="submit"
+                class="
+                    btn__login
+                    py-3 
+                    px-5 
+                    gap-4 
+                    rounded-full
+                    text-center
+                    bg-sapphire
+                "
+                >
+                    Sign In
+                </button>
+            </div>
+        </form>
+        
+        <footer class="p-4 max-w-[310px]">
+            <p class="text-xs text-gray-400 text-center">
+                By continuing, you agree to devChallenges.io's
+                <a href="#" class="text-periwinkle-blue">Terms of Service</a> and <a href="#" class="text-periwinkle-blue">Privacy Policy</a>.
+            </p>
+        </footer>
+    </main>
+</section>

@@ -1,12 +1,46 @@
+<header class="absolute flex justify-end items-center p-8 z-20 h-auto w-full">
+  <div class="relative group inline-block">
+    <div class="bg-primary rounded-xl relative">
+      @if (!_authService.isAuthenticated()) {
+        <button
+          (click)="this.router.navigate(['/login'])"
+          class="relative px-6 py-3 rounded-xl box-content text-xs font-bold w-12 bg-glass-effect outline outline-3 outline-offset-4 outline-primary transition-all duration-300 hover:bg-highlight-gradient hover:outline-orion-nebula"
+        >
+          Sign In
+        </button>
+      } @else {
+        <button
+          (click)="this.logout()"
+          class="relative px-6 py-3 rounded-xl box-content text-xs font-bold w-12 bg-glass-effect outline outline-3 outline-offset-4 outline-primary transition-all duration-300 hover:bg-highlight-gradient hover:outline-orion-nebula"
+        >
+          Log out
+        </button>
+      }
+    </div>
+  </div>
+</header>
+
 <figure class="absolute top-0 z-10 w-full">
-    <img src="assets/img/jpg/hero_img.jpg" alt="Banner" class="object-cover w-full h-96" />
+  <img
+    src="assets/img/jpg/hero_img.jpg"
+    alt="Banner"
+    class="object-cover w-full h-96"
+  />
 </figure>
 
 <figure class="absolute top-24 z-20 flex justify-center w-full">
-    <img src="assets/img/svg/logo.svg" alt="translate.io" class="h-14" />
+  <img src="assets/img/svg/logo.svg" alt="translate.io" class="h-14" />
 </figure>
 
-<main class="relative z-20 top-60 flex justify-center flex-wrap gap-4 p-8 mx-auto w-full max-w-[1200px]">
-  <app-panel-input class="w-full laptop:w-auto laptop:flex-1" (textEvent)="updateText($event)" />
-  <app-panel-display class="w-full laptop:w-auto laptop:flex-1" [translation]="translation" />
+<main
+  class="relative z-20 top-60 flex justify-center flex-wrap gap-4 p-8 mx-auto w-full max-w-[1200px]"
+>
+  <app-panel-input
+    class="w-full laptop:w-auto laptop:flex-1"
+    (textEvent)="updateText($event)"
+  />
+  <app-panel-display
+    class="w-full laptop:w-auto laptop:flex-1"
+    [translation]="translation"
+  />
 </main>

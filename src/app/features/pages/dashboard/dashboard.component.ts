@@ -1,7 +1,10 @@
 import { Component, inject, signal } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '@core/auth/services/auth.service';
 import { LanguageStateService } from '@core/services/language-state.service';
 import { TranslationService } from '@core/services/translation.service';
-import { TranslationResponse } from '@core/types/responses/translate-response';
+import { TranslationResponse } from '@core/types/responses/translate-response.interface.ts';
+import { MessageService } from 'primeng/api';
 import { PanelDisplayComponent } from "./components/panel-display/panel-display.component";
 import { PanelInputComponent } from './components/panel-input/panel-input.component';
 
@@ -13,15 +16,20 @@ import { PanelInputComponent } from './components/panel-input/panel-input.compon
   styleUrl: './dashboard.component.scss'
 })
 export class DashboardComponent {
+  public router = inject(Router);
   public text: string = ''; 
   public sourceLang = signal('en');
   public targetLang = signal('fr');
   public translation: string = '';
 
-  public loading: boolean = false;
-  private _translationService = inject(TranslationService);
-  public _languageState = inject(LanguageStateService);
+  private messageService = inject(MessageService);
 
+  public loading: boolean = false;
+  protected _languageState = inject(LanguageStateService);
+  
+  private _translationService = inject(TranslationService);
+  protected _authService = inject(AuthService);
+  
   private _translate(): void {
     if (!this.text || this.text.trim() === '') {
       this.translation = '';
@@ -57,5 +65,10 @@ export class DashboardComponent {
   public updateTargetLang(target: number): void {
     this._languageState.setTargetLang(target);
     this._translate();
+  }
+
+  public logout(): void {
+    this._authService.clearToken();
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Logged out successfully' });
   }
 }

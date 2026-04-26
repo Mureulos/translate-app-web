@@ -1,9 +1,8 @@
+import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { TranslationResponse } from '../types/responses/translate-response';
 import { API_URL } from '../tokens/api.token';
-import { TranslationRequest } from '../types/requests/translation.interface';
+import { TranslationResponse } from '../types/responses/translate-response.interface.ts';
 
 @Injectable({
   providedIn: 'root'

@@ -17,7 +17,8 @@ module.exports = {
       'iron': "#D2D5DA",
       'bright-grey': "#394150",
       'periwinkle-blue': "#7CA9F3",
-      'sapphire': "#263FA9"
+      'sapphire': "#263FA9",
+      'orion-nebula': "#A855F7",
     },
     fontFamily: {
       sans: ['"DM Sans"', 'sans-serif'],
@@ -31,7 +32,12 @@ module.exports = {
         "lg": "100px",
       },
       backgroundColor: {
-        "transparent": "transparent"
+        'glass-slate': 'rgba(30, 41, 59, 0.8)',
+        'glass-effect': 'rgba(15,23,42,.6)',
+      },
+      backgroundImage: {
+        'glass-effect': 'linear-gradient(180deg, rgba(226, 232, 255, 0), rgba(226, 232, 255, 0.12))',
+        'highlight-gradient': 'linear-gradient(to bottom right, #6366f1, #a855f7, #ec4899)',
       },
       maxWidth: {
         "1250": "1250px"
@@ -43,9 +49,11 @@ module.exports = {
       border: {
         'primary': "#4D5562",
         'periwinkle-blue': "#7CA9F3",
+      },
+      borderWidth: {
+        '1': '1px',
       }
     }
   },
   plugins: [],
 }
-
