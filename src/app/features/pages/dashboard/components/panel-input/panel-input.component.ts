@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, effect, output, ViewEncapsulation } from '@angular/core';
+import { Component, effect, inject, output, ViewEncapsulation } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { UtilsService } from '@shared/utils.service';
+import { MessageService } from 'primeng/api';
 import { ButtonModule } from "primeng/button";
 import { debounceTime, distinctUntilChanged, startWith } from 'rxjs';
 import { LangSelectorComponent } from '../lang-selector/lang-selector.component';
@@ -28,6 +29,7 @@ import { LangSelectorComponent } from '../lang-selector/lang-selector.component'
   encapsulation: ViewEncapsulation.None
 })
 export class PanelInputComponent {
+  private messageService = inject(MessageService);
   public translationControl = new FormControl(
     '', 
     [
@@ -62,5 +64,6 @@ export class PanelInputComponent {
 
   public copyText(text: string): void {
     UtilsService.copyToClickboard(text);
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Text copied to clipboard' });
   }
 }

@@ -1,14 +1,19 @@
+import { User } from "../user.interface";
 
 export interface TranslationResponse {
-    translation: TranslationDetail;
+    response: TranslationDetail;
 }
 
 export interface TranslationDetail {
     id: number;
     text: string;
-    translation: string;
+    translationText: string;
+    sourceLanguageId: number;
     sourceLanguage: Language;
+    targetLanguageId: number;
     targetLanguage: Language;
+    userId: number;
+    user: User | null;
     characterCount: number;
     createdAt: string;
 }

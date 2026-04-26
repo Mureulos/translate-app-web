@@ -4,7 +4,9 @@ import { AuthService } from '@core/auth/services/auth.service';
 import { LanguageStateService } from '@core/services/language-state.service';
 import { TranslationService } from '@core/services/translation.service';
 import { TranslationResponse } from '@core/types/responses/translate-response.interface.ts';
+import { UtilsService } from '@shared/utils.service';
 import { MessageService } from 'primeng/api';
+import { finalize } from 'rxjs';
 import { PanelDisplayComponent } from "./components/panel-display/panel-display.component";
 import { PanelInputComponent } from './components/panel-input/panel-input.component';
 
@@ -22,9 +24,9 @@ export class DashboardComponent {
   public targetLang = signal('fr');
   public translation: string = '';
 
-  private messageService = inject(MessageService);
+  private _utilsService = inject(UtilsService);
+  private _messageService = inject(MessageService);
 
-  public loading: boolean = false;
   protected _languageState = inject(LanguageStateService);
   
   private _translationService = inject(TranslationService);
@@ -36,19 +38,19 @@ export class DashboardComponent {
       return;
     }
 
-    this.loading = true;
+    this._utilsService.show();
+
     const source = this._languageState.sourceLang();
     const target = this._languageState.targetLang();
 
     this._translationService.translation(this.text, source, target)
+    .pipe(
+      finalize(() => this._utilsService.hide())
+    )
     .subscribe({
       next: (response: TranslationResponse) => {
-        this.translation = response.translation.translation;
-        this.loading = false;
+        this.translation = response.response.translationText;
       },
-      error: () => {
-        this.loading = false;
-      }
     });
   }
 
@@ -69,6 +71,6 @@ export class DashboardComponent {
 
   public logout(): void {
     this._authService.clearToken();
-    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Logged out successfully' });
+    this._messageService.add({ severity: 'success', summary: 'Success', detail: 'Logged out successfully' });
   }
 }
