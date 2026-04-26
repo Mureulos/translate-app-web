@@ -4,16 +4,24 @@
       @if (!_authService.isAuthenticated()) {
         <button
           (click)="this.router.navigate(['/login'])"
-          class="relative px-6 py-3 rounded-xl box-content text-xs font-bold w-12 bg-glass-effect outline outline-3 outline-offset-4 outline-primary transition-all duration-300 hover:bg-highlight-gradient hover:outline-orion-nebula"
+          class="group/btn relative overflow-hidden px-6 py-3 rounded-xl box-content text-xs font-bold w-12 bg-glass-effect outline outline-3 outline-offset-4 outline-primary transition-all duration-300 hover:outline-orion-nebula"
         >
-          Sign In
+          <div
+            class="absolute inset-0 bg-highlight-gradient opacity-0 transition-opacity duration-300 group-hover/btn:opacity-100"
+          ></div>
+
+          <span class="relative z-10">Sign In</span>
         </button>
       } @else {
         <button
           (click)="this.logout()"
-          class="relative px-6 py-3 rounded-xl box-content text-xs font-bold w-12 bg-glass-effect outline outline-3 outline-offset-4 outline-primary transition-all duration-300 hover:bg-highlight-gradient hover:outline-orion-nebula"
+          class="group/btn relative overflow-hidden px-6 py-3 rounded-xl box-content text-xs font-bold w-12 bg-glass-effect outline outline-3 outline-offset-4 outline-primary transition-all duration-300 hover:outline-orion-nebula"
         >
-          Log out
+          <div
+            class="absolute inset-0 bg-highlight-gradient opacity-0 transition-opacity duration-300 group-hover/btn:opacity-100"
+          ></div>
+
+          <span class="relative z-10">Log out</span>
         </button>
       }
     </div>

@@ -1,5 +1,17 @@
 @use 'settings' as settings;
 
+aside {
+  h1 {
+    strong {
+      background: linear-gradient(90deg, #A855F7 0%, #F472B6 49%, #FDE047 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent;
+    }
+  }
+}
+
 form {
   .btn__login {
     border: 1px solid settings.$periwinkle-blue;
@@ -13,15 +25,20 @@ form {
   }
 
   .p-inputtext {
-    background-color: white;
-    color: settings.$primary !important;
+    background-color: #0f0621;
     outline-color: settings.$periwinkle-blue !important;
     border-color: none !important;
     font-weight: 500;
   }
-  
+
   ::ng-deep .p-inputtext.ng-invalid.ng-dirty {
     box-shadow: none !important;
-    border-color: transparent !important;
+    border-color: settings.$bright-grey !important;
+  }
+
+  ::ng-deep .p-inputtext:enabled:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: inherit !important;
   }
 }

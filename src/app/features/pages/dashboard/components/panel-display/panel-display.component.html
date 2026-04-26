@@ -10,8 +10,8 @@
 
     <div class="flex justify-between items-end max-h-[70px] h-full">
         <div class="flex gap-2">
-            <p-button (onClick)="copyText(translationControl.value || '')" icon="pi pi-copy" />
             <p-button icon="pi pi-volume-up" />
+            <p-button (onClick)="copyText(translationControl.value || '')" icon="pi pi-copy" />
         </div>
 
         @if (authService.isAuthenticated()) {
