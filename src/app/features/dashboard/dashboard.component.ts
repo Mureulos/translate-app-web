@@ -9,13 +9,14 @@ import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { StepperModule } from 'primeng/stepper';
 import { finalize } from 'rxjs';
+import { FavoriteTranslationsComponent } from './components/favorite-translations/favorite-translations.component';
 import { PanelDisplayComponent } from "./components/panel-display/panel-display.component";
 import { PanelInputComponent } from './components/panel-input/panel-input.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [PanelDisplayComponent, PanelInputComponent, StepperModule, ButtonModule],
+  imports: [PanelDisplayComponent, PanelInputComponent, StepperModule, ButtonModule, FavoriteTranslationsComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
@@ -74,6 +75,7 @@ export class DashboardComponent {
 
   public logout(): void {
     this._authService.clearToken();
+    this.activeStep = 1;
     this._messageService.add({ severity: 'success', summary: 'Success', detail: 'Logged out successfully' });
   }
 }

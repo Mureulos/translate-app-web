@@ -56,9 +56,10 @@ export class TranslationService {
 
   public deleteSavedTranslation(
     id?: number,
-  ): Observable<SaveTranslationResponse | SaveTranslationResponse[] | any> {
+  ): Observable<void> {
     return this._http.delete<
       SaveTranslationResponse | SaveTranslationResponse[] | any
     >(`${this._apiUrl}translation/save/${id}`, {});
   }
 }
+  

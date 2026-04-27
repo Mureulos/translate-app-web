@@ -1,8 +1,6 @@
 @use 'settings' as settings;
 
 form {
-    background-color: #242a36d6;
-
     .btn__translate {
         border: 1px solid settings.$periwinkle-blue;
         transition: all 0.15s ease-out;

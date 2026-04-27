@@ -1,4 +1,6 @@
-<header class="absolute flex justify-end items-center p-8 z-20 h-auto w-full">
+<header
+  class="absolute flex justify-end items-center px-4 py-6 z-20 h-auto w-full laptop:py-8 laptop:px-8"
+>
   <div class="relative group inline-block">
     <div class="bg-primary rounded-xl relative">
       @if (!_authService.isAuthenticated()) {
@@ -42,13 +44,15 @@
 
 <p-stepper
   [(value)]="activeStep"
-  class="relative z-20 top-60 flex flex-col items-center gap-4 p-8 mx-auto w-full max-w-[1200px]"
+  class="relative z-20 top-60 flex flex-col items-center gap-4 mx-auto w-full max-w-[1200px] p-2 laptop:p-8"
 >
   <p-step-panels class="w-full">
     <p-step-panel [value]="1">
       <ng-template #content>
         <div class="wrapper">
-          <div class="flex items-stretch justify-center flex-wrap gap-4 w-full">
+          <div
+            class="flex flex-col justify-center gap-4 w-full laptop:flex-row"
+          >
             <app-panel-input
               class="w-full laptop:w-auto laptop:flex-1"
               (textEvent)="updateText($event)"
@@ -61,12 +65,14 @@
             />
           </div>
 
-          <p-button
-            label="Saved"
-            severity="secondary"
-            (onClick)="activeStep = 2"
-            class="mt-4"
-          />
+          @if (_authService.isAuthenticated()) {
+            <p-button
+              label="Saved"
+              severity="secondary"
+              (onClick)="activeStep = 2"
+              class="mt-4"
+            />
+          }
         </div>
       </ng-template>
     </p-step-panel>
@@ -74,11 +80,7 @@
     <p-step-panel [value]="2">
       <ng-template #content>
         <div class="wrapper">
-          <div
-            class="flex flex-col items-center gap-4 glass-effect p-8 rounded-xl w-full"
-          >
-            <h2 class="text-2xl font-bold text-white">Step 2</h2>
-          </div>
+          <app-favorite-translations class="w-full" />
 
           <p-button
             label="Translate"
