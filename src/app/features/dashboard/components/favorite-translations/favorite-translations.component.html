@@ -1,5 +1,5 @@
 <section
-  class="flex flex-col items-center gap-4 w-full overflow-y-auto overflow-x-hidden h-[800px] pr-2"
+  class="flex flex-col items-center gap-4 w-full overflow-y-auto overflow-x-hidden max-h-[800px] h-full pr-2"
 >
   @for (item of translationsSaved; track $index) {
     <div
@@ -7,7 +7,7 @@
     >
       <div class="flex items-center justify-between mb-4">
         <span
-          class="bg-sapphire text-periwinkle-blue p-2 rounded-sm text-xs font-bold h-6 w-6 flex justify-center items-center"
+          class="bg-sapphire text-periwinkle-blue p-2 rounded-full text-xs font-bold h-6 w-6 flex justify-center items-center"
         >
           {{ item.id }}
         </span>

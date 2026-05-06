@@ -21,6 +21,7 @@
         background: transparent;
         color: white;
         height: 100%;
+        width: 100%;
         
         &:hover, &:active, &:focus {
             border: 2px solid vars.$primary;
@@ -44,3 +45,11 @@
     height: 1px;
     background-color: vars.$primary;
 }
+
+@media screen and (min-width: 500px) {
+    .lang-selector {
+        .swap-button {
+            width: 30px;
+        }
+    }
+}   

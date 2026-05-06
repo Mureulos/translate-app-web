@@ -9,20 +9,35 @@
     class="font-sans font-semibold"
   ></textarea>
 
-  <div class="flex items-end justify-between">
-    <div class="flex gap-2">
+  <div class="flex flex-col-reverse items-start gap-4 justify-between laptop:flex-row laptop:items-end">
+    <div class="flex gap-2 items-center flex-wrap">
       <p-button icon="pi pi-volume-up" />
       <p-button (onClick)="copyText(message.value)" icon="pi pi-copy" />
+      
+      @if (_authService.isAuthenticated()) {
+        <div class="flex items-center gap-2">
+          <p-fileupload 
+            #fu 
+            mode="basic" 
+            chooseLabel="Choose" 
+            chooseIcon="pi pi-upload" 
+            accept=".txt" 
+            maxFileSize="1000000" 
+            [auto]="false"
+            (onSelect)="onFileSelect($event)"
+          />
+        </div>
+      }
     </div>
 
-    <div class="flex flex-col items-end gap-2">
+    <div class="flex flex-col items-end gap-2 w-full laptop:w-auto">
       <mat-hint class="text-xs relative">
         {{ message.value.length }} / 300
       </mat-hint>
 
       <button
         type="button"
-        class="btn__translate flex items-center justify-between py-3 px-5 gap-4 rounded-xl bg-sapphire"
+        class="btn__translate flex items-center justify-center py-3 px-5 gap-4 rounded-xl bg-sapphire w-full"
         (click)="submitTranslation()"
       >
         <mat-icon fontIcon="format_color_text" class="text-xl"></mat-icon>

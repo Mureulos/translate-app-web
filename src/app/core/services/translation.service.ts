@@ -61,5 +61,21 @@ export class TranslationService {
       SaveTranslationResponse | SaveTranslationResponse[] | any
     >(`${this._apiUrl}translation/save/${id}`, {});
   }
+
+  public translateFile(
+    file: File,
+    sourceLanguageId: number,
+    targetLanguageId: number,
+  ): Observable<TranslationResponse> {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('sourceLanguageId', sourceLanguageId.toString());
+    formData.append('targetLanguageId', targetLanguageId.toString());
+
+    return this._http.post<TranslationResponse>(
+      `${this._apiUrl}translation/from-file`,
+      formData,
+    );
+  }
 }
   

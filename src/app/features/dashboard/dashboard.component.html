@@ -56,6 +56,7 @@
             <app-panel-input
               class="w-full laptop:w-auto laptop:flex-1"
               (textEvent)="updateText($event)"
+              (fileEvent)="translateFile($event)"
             />
 
             <app-panel-display
@@ -82,11 +83,13 @@
         <div class="wrapper">
           <app-favorite-translations class="w-full" />
 
-          <p-button
-            label="Translate"
-            severity="secondary"
-            (onClick)="activeStep = 1"
-          />
+          @if (_authService.isAuthenticated()) {
+            <p-button
+              label="Translate"
+              severity="secondary"
+              (onClick)="activeStep = 1"
+            />
+          }
         </div>
       </ng-template>
     </p-step-panel>

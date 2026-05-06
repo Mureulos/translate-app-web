@@ -78,4 +78,24 @@ export class DashboardComponent {
     this.activeStep = 1;
     this._messageService.add({ severity: 'success', summary: 'Success', detail: 'Logged out successfully' });
   }
+
+  public translateFile(file: File): void {
+    this._utilsService.show();
+
+    const source = this._languageState.sourceLang();
+    const target = this._languageState.targetLang();
+
+    this._translationService.translateFile(file, source, target)
+    .pipe(
+      finalize(() => this._utilsService.hide())
+    )
+    .subscribe({
+      next: (response: TranslationResponse) => {
+        this.translation = response.response.translationText;
+      },
+      error: () => {
+        this._messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to translate file' });
+      }
+    });
+  }
 }
