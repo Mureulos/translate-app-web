@@ -42,17 +42,21 @@
   <img src="assets/img/svg/logo.svg" alt="translate.io" class="h-14" />
 </figure>
 
-<p-stepper
-  [(value)]="activeStep"
-  class="relative z-20 top-60 flex flex-col items-center gap-4 mx-auto w-full max-w-[1200px] p-2 laptop:p-8"
->
-  <p-step-panels class="w-full">
-    <p-step-panel [value]="1">
-      <ng-template #content>
-        <div class="wrapper">
-          <div
-            class="flex flex-col justify-center gap-4 w-full laptop:flex-row"
-          >
+<div class="relative z-20 top-60 mx-auto w-full max-w-[1200px] flex flex-col items-center custom-carousel">
+  <p-carousel 
+    [value]="dashboardScreens" 
+    [numVisible]="1" 
+    [numScroll]="1" 
+    [circular]="false"
+    [showNavigators]="false" 
+    [showIndicators]="_authService.isAuthenticated()" 
+    class="w-full"
+  >
+    <ng-template let-screen pTemplate="item">
+      
+      @if (screen === 1) {
+        <div class="p-2 laptop:p-8 w-full flex justify-center">
+          <div class="flex flex-col justify-center gap-4 w-full laptop:flex-row">
             <app-panel-input
               class="w-full laptop:w-auto laptop:flex-1"
               (textEvent)="updateText($event)"
@@ -65,33 +69,15 @@
               [text]="text"
             />
           </div>
-
-          @if (_authService.isAuthenticated()) {
-            <p-button
-              label="Saved"
-              severity="secondary"
-              (onClick)="activeStep = 2"
-              class="mt-4"
-            />
-          }
         </div>
-      </ng-template>
-    </p-step-panel>
+      }
 
-    <p-step-panel [value]="2">
-      <ng-template #content>
-        <div class="wrapper">
-          <app-favorite-translations class="w-full" />
-
-          @if (_authService.isAuthenticated()) {
-            <p-button
-              label="Translate"
-              severity="secondary"
-              (onClick)="activeStep = 1"
-            />
-          }
+      @if (screen === 2) {
+        <div class="p-2 laptop:p-8 w-full flex justify-center">
+           <app-favorite-translations class="w-full" />
         </div>
-      </ng-template>
-    </p-step-panel>
-  </p-step-panels>
-</p-stepper>
+      }
+
+    </ng-template>
+  </p-carousel>
+</div>

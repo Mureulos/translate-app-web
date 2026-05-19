@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslationService } from '@core/services/translation.service';
@@ -6,7 +7,7 @@ import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-favorite-translations',
-  imports: [MatIconModule],
+  imports: [MatIconModule, DatePipe],
   templateUrl: './favorite-translations.component.html',
   styleUrl: './favorite-translations.component.scss',
 })
@@ -24,7 +25,6 @@ export class FavoriteTranslationsComponent {
     this.translationService.getSavedTranslation().subscribe({
       next: (response) => {
         this.translationsSaved = response.response;
-        console.log(this.translationsSaved);
       },
       error: (error) => {
         this._messageService.add({

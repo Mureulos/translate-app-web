@@ -7,6 +7,7 @@ import { TranslationResponse } from '@core/types/responses/translate-response.in
 import { UtilsService } from '@shared/utils.service';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
+import { CarouselModule } from 'primeng/carousel';
 import { StepperModule } from 'primeng/stepper';
 import { finalize } from 'rxjs';
 import { FavoriteTranslationsComponent } from './components/favorite-translations/favorite-translations.component';
@@ -16,9 +17,9 @@ import { PanelInputComponent } from './components/panel-input/panel-input.compon
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [PanelDisplayComponent, PanelInputComponent, StepperModule, ButtonModule, FavoriteTranslationsComponent],
+  imports: [PanelDisplayComponent, PanelInputComponent, StepperModule, ButtonModule, FavoriteTranslationsComponent, CarouselModule],
   templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  styleUrl: './dashboard.component.scss',
 })
 export class DashboardComponent {
   public activeStep: number = 1;
@@ -27,15 +28,15 @@ export class DashboardComponent {
   public sourceLang = signal('en');
   public targetLang = signal('fr');
   public translation: string = '';
+  public dashboardScreens = [1, 2];
 
   private _utilsService = inject(UtilsService);
   private _messageService = inject(MessageService);
+  private _translationService = inject(TranslationService);
 
   protected _languageState = inject(LanguageStateService);
-  
-  private _translationService = inject(TranslationService);
   protected _authService = inject(AuthService);
-  
+
   private _translate(): void {
     if (!this.text || this.text.trim() === '') {
       this.translation = '';
@@ -75,7 +76,6 @@ export class DashboardComponent {
 
   public logout(): void {
     this._authService.clearToken();
-    this.activeStep = 1;
     this._messageService.add({ severity: 'success', summary: 'Success', detail: 'Logged out successfully' });
   }
 

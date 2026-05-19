@@ -8,7 +8,7 @@
   />
 </figure>
 
-<div class="flex relative z-20 h-dvh">
+<div class="flex relative z-20 h-dvh items-center justify-center">
   <aside class="hidden laptop:flex items-center justify-center w-full">
     <div class="flex flex-col gap-6 p-8 h-[500px]">
       <img src="assets/img/svg/devChallenge_icon.svg" alt="Logo" class="w-12" />
@@ -30,65 +30,199 @@
     </div>
   </aside>
 
-  <section class="w-full p-6 flex items-center justify-center">
-    <main
-      class="relative flex flex-col justify-center items-center gap-8 bg-glass-effect border-bright-grey border-1 rounded-sm w-full min-h-[640px] p-6 laptop:max-w-[585px]"
+  <div class="w-full custom-carousel">
+    <p-carousel
+      [value]="authScreens"
+      [numVisible]="1"
+      [numScroll]="1"
+      [circular]="false"
+      [showNavigators]="false"
+      class="w-full"
     >
-      <form
-        [formGroup]="loginForm"
-        (ngSubmit)="onSubmit()"
-        class="flex flex-col max-w-[310px] w-full justify-center gap-6"
-      >
-        <div>
-          <img src="assets/img/svg/devChallenge_icon.svg" alt="Logo" />
+      <ng-template let-screen pTemplate="item">
+        @if (screen === 1) {
+          <div class="w-full h-full p-6 flex items-center justify-center">
+            <main
+              class="relative flex flex-col justify-center items-center gap-8 bg-glass-effect border-bright-grey border-1 rounded-sm w-full min-h-[640px] p-6 laptop:max-w-[585px]"
+            >
+              <form
+                [formGroup]="loginForm"
+                (ngSubmit)="onSubmitLogin()"
+                class="flex flex-col max-w-[310px] w-full justify-center gap-6"
+              >
+                <div>
+                  <img src="assets/img/svg/devChallenge_icon.svg" alt="Logo" />
 
-          <h1 class="font-bold text-2xl mt-4 text-slate-200">
-            devChallenges.io
-          </h1>
+                  <h1 class="font-bold text-2xl mt-4 text-slate-200">
+                    devChallenges.io
+                  </h1>
 
-          <p class="text-sm text-iron mt-1 font-semibold">
-            Sign in to your account
-          </p>
-        </div>
+                  <p class="text-sm text-iron mt-1 font-semibold">
+                    Sign in to your account
+                  </p>
+                </div>
 
-        <div class="flex flex-col gap-4 w-full">
-          <div class="flex flex-col">
-            <label for="username">Email</label>
-            <input
-              type="email"
-              pInputText
-              placeholder="Email"
-              formControlName="email"
-            />
+                <div class="flex flex-col gap-4 w-full">
+                  <div class="flex flex-col">
+                    <label for="emailSignIn">Email</label>
+                    <input
+                      id="emailSignIn"
+                      type="email"
+                      pInputText
+                      placeholder="Email"
+                      formControlName="email"
+                    />
+                  </div>
+
+                  <div class="flex flex-col">
+                    <label for="passwordSignIn">Password</label>
+                    <input
+                      id="passwordSignIn"
+                      type="password"
+                      pInputText
+                      placeholder="Password"
+                      formControlName="password"
+                      class="!bg-white"
+                    />
+                  </div>
+
+                  <button
+                    type="submit"
+                    class="btn__login py-3 px-5 gap-4 rounded-full text-center bg-sapphire"
+                  >
+                    Sign In
+                  </button>
+                </div>
+              </form>
+
+              <footer class="absolute bottom-0 p-4 max-w-[310px]">
+                <p class="text-xs text-gray-400 text-center">
+                  By continuing, you agree to devChallenges.io's
+                  <a href="#" class="text-periwinkle-blue">Terms of Service</a>
+                  and
+                  <a href="#" class="text-periwinkle-blue">Privacy Policy</a>.
+                </p>
+              </footer>
+            </main>
           </div>
+        }
 
-          <div class="flex flex-col">
-            <label for="username">Password</label>
-            <input
-              type="password"
-              pInputText
-              placeholder="Password"
-              formControlName="password"
-              class="!bg-white"
-            />
+        @if (screen === 2) {
+          <div class="w-full h-full p-6 flex items-center justify-center">
+            <main
+              class="relative flex flex-col justify-center items-center gap-8 bg-glass-effect border-bright-grey border-1 rounded-sm w-full px-6 py-12 laptop:max-w-[585px]"
+            >
+              <div
+                class="flex flex-col max-w-[310px] w-full justify-center gap-6"
+              >
+                <aside>
+                  <img src="assets/img/svg/devChallenge_icon.svg" alt="Logo" />
+
+                  <h1 class="font-bold text-2xl mt-4 text-slate-200">
+                    devChallenges.io
+                  </h1>
+
+                  <p class="text-sm text-iron mt-1 font-semibold">
+                    Sign up to your account
+                  </p>
+                </aside>
+
+                <form
+                  [formGroup]="registerForm"
+                  (ngSubmit)="onSubmitRegister()"
+                  class="flex flex-col gap-4 w-full"
+                >
+                  <div class="flex flex-col">
+                    <label for="signUpName">Name</label>
+                    <input
+                      id="signUpName"
+                      type="text"
+                      pInputText
+                      placeholder="Name"
+                      formControlName="name"
+                    />
+                  </div>
+
+                  <div class="flex flex-col">
+                    <label for="signUpLastName">Last Name</label>
+                    <input
+                      id="signUpLastName"
+                      type="text"
+                      pInputText
+                      placeholder="Last Name"
+                      formControlName="lastName"
+                    />
+                  </div>
+
+                  <div class="flex flex-col">
+                    <label for="signUpEmail">Email</label>
+                    <input
+                      id="signUpEmail"
+                      type="email"
+                      pInputText
+                      placeholder="Email"
+                      formControlName="email"
+                    />
+                  </div>
+
+                  <div class="flex flex-col">
+                    <label for="signUpPassword">Password</label>
+                    <input
+                      id="signUpPassword"
+                      type="password"
+                      pInputText
+                      placeholder="Password"
+                      formControlName="password"
+                      class="!bg-white"
+                    />
+                  </div>
+
+                  <div class="flex flex-col">
+                    <label for="signUpConfirm">Confirm Password</label>
+                    <input
+                      id="signUpConfirm"
+                      type="password"
+                      pInputText
+                      placeholder="Confirm Password"
+                      formControlName="confirmPassword"
+                      class="!bg-white"
+                    />
+                  </div>
+
+                  <div class="flex flex-col">
+                    <label for="defaultLanguage">Default language</label>
+                    <p-dropdown
+                      [options]="languages()"
+                      optionLabel="name"
+                      optionValue="code"
+                      styleClass="w-full"
+                      inputId="defaultLanguage"
+                      formControlName="defaultLanguage"
+                    >
+                    </p-dropdown>
+                  </div>
+
+                  <button
+                    type="submit"
+                    class="btn__login py-3 px-5 gap-4 rounded-full text-center bg-sapphire"
+                  >
+                    Sign Up
+                  </button>
+                </form>
+              </div>
+
+              <footer class="bottom-0 p-4 max-w-[310px]">
+                <p class="text-xs text-gray-400 text-center">
+                  By continuing, you agree to devChallenges.io's
+                  <a href="#" class="text-periwinkle-blue">Terms of Service</a>
+                  and
+                  <a href="#" class="text-periwinkle-blue">Privacy Policy</a>.
+                </p>
+              </footer>
+            </main>
           </div>
-
-          <button
-            type="submit"
-            class="btn__login py-3 px-5 gap-4 rounded-full text-center bg-sapphire"
-          >
-            Sign In
-          </button>
-        </div>
-      </form>
-
-      <footer class="absolute bottom-0 p-4 max-w-[310px]">
-        <p class="text-xs text-gray-400 text-center">
-          By continuing, you agree to devChallenges.io's
-          <a href="#" class="text-periwinkle-blue">Terms of Service</a> and
-          <a href="#" class="text-periwinkle-blue">Privacy Policy</a>.
-        </p>
-      </footer>
-    </main>
-  </section>
+        }
+      </ng-template>
+    </p-carousel>
+  </div>
 </div>

@@ -13,6 +13,10 @@
         </span>
 
         <button icon="pi pi-star-fill" (click)="removeFromFavorites(item.id)">
+          <mat-icon fontIcon="trash" class="text-xl text-[#d56e0c]"></mat-icon>
+        </button>
+
+        <button icon="pi pi-star-fill" (click)="removeFromFavorites(item.id)">
           <mat-icon fontIcon="star" class="text-xl text-[#d56e0c]"></mat-icon>
         </button>
       </div>
@@ -21,6 +25,7 @@
         {{ item.translationText }}
       </h1>
       <p class="text-wrap break-words italic text-primary">"{{ item.text }}"</p>
+      <span class="text-wrap break-words italic text-iron text-xs text-end">{{ item.createdAt | date:'short' }}</span>
     </div>
   }
 </section>

@@ -3,7 +3,7 @@
 aside {
   h1 {
     strong {
-      background: linear-gradient(90deg, #A855F7 0%, #F472B6 49%, #FDE047 100%);
+      background: linear-gradient(90deg, #a855f7 0%, #f472b6 49%, #fde047 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -40,5 +40,82 @@ form {
     outline: none !important;
     box-shadow: none !important;
     border-color: inherit !important;
+  }
+
+  ::ng-deep .p-dropdown {
+    background-color: #16182f;
+    border-color: transparent !important;
+    border-radius: 6px;
+
+    &:not(.p-disabled).p-focus {
+      outline: none !important;
+      box-shadow: none !important;
+      border-color: inherit !important;
+    }
+
+    .p-dropdown-label {
+      background: transparent;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.87); 
+    }
+  }
+}
+
+::ng-deep .p-dropdown-panel {
+  background-color: #16182f;
+  border: 1px solid settings.$bright-grey;
+  border-radius: 6px;
+
+  .p-dropdown-items .p-dropdown-item {
+    color: rgba(255, 255, 255, 0.87);
+    font-weight: 500;
+    transition: background-color 0.2s;
+
+    &:not(.p-highlight):not(.p-disabled):hover {
+      background-color: rgba(255, 255, 255, 0.05);
+      color: #ffffff;
+    }
+
+    &.p-highlight {
+      background-color: settings.$sapphire;
+      color: #ffffff;
+    }
+  }
+}
+
+::ng-deep .custom-carousel {
+  .p-carousel-indicators {
+    padding: 2rem 0 0 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .p-carousel-indicator {
+    margin: 0 !important;
+
+    button {
+      width: 14px !important;
+      height: 14px !important;
+      border-radius: 50% !important;
+      background-color: transparent !important;
+      border: 2px solid settings.$primary !important;
+      transition:
+        background-color 0.3s ease,
+        transform 0.2s ease;
+      opacity: 1 !important;
+      box-shadow: none !important;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+
+    &.p-highlight button {
+      background-color: settings.$primary !important;
+      border-color: settings.$primary !important;
+      transform: scale(1.1);
+    }
   }
 }
