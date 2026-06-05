@@ -18,7 +18,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
-import { finalize, map } from 'rxjs';
+import { finalize, map, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -93,9 +93,6 @@ export class LoginComponent {
   }
 
   onSubmitRegister(): void {
-    console.log('Status do Formulário:', this.registerForm.status);
-    console.log('Valores atuais:', this.registerForm.value);
-    
     if (this.registerForm.valid) {
       const formValues = this.registerForm.value;
 
@@ -113,22 +110,27 @@ export class LoginComponent {
       };
 
       this._utilsService.show();
-
-      console.log('Register payload:', registerPayload);
-
-      // this._authService.register(registerPayload) 
-      // .pipe(
-      //   finalize(() => this._utilsService.hide())
-      // )
-      // .subscribe({
-      //   next: () => {
-      //     this._messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Conta criada com sucesso! Faça login.' });
-      //     this.registerForm.reset();
-      //   },
-      //   error: (error) => {
-      //     this._messageService.add({ severity: 'error', summary: 'Erro', detail: error.message || 'Falha ao registrar.' });
-      //   }
-      // });
+      
+      this._authService.signin(registerPayload) 
+        .pipe(
+          switchMap(() => this._authService.login({
+            email: formValues.email,
+            password: formValues.password
+          })),
+          finalize(() => this._utilsService.hide())
+        )
+        .subscribe({
+          next: (response: LoginResponse) => {
+            if (response && response.token) {
+              this._authService.setToken(response.token);
+            }
+            this._messageService.add({ severity: 'success', summary: 'Sucesso', detail: 'Conta criada e login realizado com sucesso!' });
+            this._router.navigate(['']);
+          },
+          error: (error) => {
+            this._messageService.add({ severity: 'error', summary: 'Erro', detail: error.message || 'Falha ao registrar ou efetuar login.' });
+          }
+        });
     } else {
       this._messageService.add({ severity: 'warn', summary: 'Atenção', detail: 'Preencha todos os campos corretamente.' });
       this.registerForm.markAllAsTouched();

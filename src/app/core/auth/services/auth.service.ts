@@ -28,6 +28,10 @@ export class AuthService {
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   });
 
+  public signin(authRequest: LoginRequest ): Observable<LoginResponse>  {
+    return this._http.post<LoginResponse>(`${this._apiUrl}auth/signin`, authRequest);
+  }
+
   public login(authRequest: LoginRequest ): Observable<LoginResponse>  {
     return this._http.post<LoginResponse>(`${this._apiUrl}auth/login`, authRequest);
   }
