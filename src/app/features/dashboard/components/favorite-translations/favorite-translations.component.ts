@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '@core/auth/services/auth.service';
 import { TranslationService } from '@core/services/translation.service';
 import { SaveTranslationDetail } from '@core/types/responses/save-translate-response.interfac';
 import { MessageService } from 'primeng/api';
@@ -12,17 +13,20 @@ import { MessageService } from 'primeng/api';
   styleUrl: './favorite-translations.component.scss',
 })
 export class FavoriteTranslationsComponent {
-  private translationService = inject(TranslationService);
+  private _authService = inject(AuthService);
+  private _translationService = inject(TranslationService);
   private _messageService = inject(MessageService);
 
   public translationsSaved: SaveTranslationDetail[] = [];
 
   ngOnInit() {
-    this.loadFavoriteTranslations();
+    if (this._authService.isAuthenticated()) {
+      this.loadFavoriteTranslations();
+    }
   }
 
   private loadFavoriteTranslations(): void {
-    this.translationService.getSavedTranslation().subscribe({
+    this._translationService.getSavedTranslation().subscribe({
       next: (response) => {
         this.translationsSaved = response.response;
       },
@@ -37,7 +41,7 @@ export class FavoriteTranslationsComponent {
   }
 
   public removeFromFavorites(translationId: number): void {
-    this.translationService.deleteSavedTranslation(translationId).subscribe({
+    this._translationService.deleteSavedTranslation(translationId).subscribe({
       next: () => {
         this._messageService.add({
           severity: 'success',

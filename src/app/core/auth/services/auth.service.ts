@@ -8,7 +8,7 @@ import { MessageService } from 'primeng/api';
 import { Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
   private readonly _apiUrl = inject(API_URL);
@@ -28,12 +28,18 @@ export class AuthService {
     return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   });
 
-  public signin(authRequest: LoginRequest ): Observable<LoginResponse>  {
-    return this._http.post<LoginResponse>(`${this._apiUrl}auth/signin`, authRequest);
+  public signin(authRequest: LoginRequest): Observable<LoginResponse> {
+    return this._http.post<LoginResponse>(
+      `${this._apiUrl}auth/signin`,
+      authRequest,
+    );
   }
 
-  public login(authRequest: LoginRequest ): Observable<LoginResponse>  {
-    return this._http.post<LoginResponse>(`${this._apiUrl}auth/login`, authRequest);
+  public login(authRequest: LoginRequest): Observable<LoginResponse> {
+    return this._http.post<LoginResponse>(
+      `${this._apiUrl}auth/login`,
+      authRequest,
+    );
   }
 
   public setToken(token: string): void {
@@ -45,8 +51,33 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
+  private isTokenExpired(token: string): boolean {
+    if (!token) return true;
+
+    try {
+      const payload = token.split('.')[1];
+      const decodedPayload = window.atob(payload);
+      const parsedPayload = JSON.parse(decodedPayload);
+
+      const expirationDate = parsedPayload.exp * 1000;
+      const now = Date.now();
+
+      return now >= expirationDate;
+    } catch (e) {
+      return true;
+    }
+  }
+
   public isAuthenticated(): boolean {
-    return !!this.getToken();
+    const token = this.getToken();
+    if (!token) return false;
+
+    if (this.isTokenExpired(token)) {
+      this.clearToken();
+      return false;
+    }
+
+    return true;
   }
 
   public clearToken(): void {
@@ -57,8 +88,8 @@ export class AuthService {
   public startTokenTimer(token: string): void {
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
-      
-      const expDate = payload.exp * 1000; 
+
+      const expDate = payload.exp * 1000;
       const timeUntilExpiration = expDate - new Date().getTime();
 
       if (timeUntilExpiration > 0) {
@@ -76,9 +107,8 @@ export class AuthService {
             clearInterval(this._countdownInterval);
           }
         }, 1000);
-
       } else {
-        this.autoLogout(); 
+        this.autoLogout();
       }
     } catch (e) {
       console.error('Falha ao processar o token', e);
@@ -95,10 +125,10 @@ export class AuthService {
   private autoLogout(): void {
     this.clearToken();
     this._router.navigate(['/login']);
-    this._messageService.add({ 
-      severity: 'warn', 
-      summary: 'Sessão Expirada', 
-      detail: 'Sua sessão expirou por segurança. Faça login novamente.' 
+    this._messageService.add({
+      severity: 'warn',
+      summary: 'Sessão Expirada',
+      detail: 'Sua sessão expirou por segurança. Faça login novamente.',
     });
   }
 }

@@ -42,7 +42,7 @@ form {
     border-color: inherit !important;
   }
 
-  ::ng-deep .p-dropdown {
+  ::ng-deep .p-select {
     background-color: #16182f;
     border-color: transparent !important;
     border-radius: 6px;
@@ -53,7 +53,7 @@ form {
       border-color: inherit !important;
     }
 
-    .p-dropdown-label {
+    .p-select-label {
       background: transparent;
       font-weight: 500;
       color: rgba(255, 255, 255, 0.87); 
@@ -61,12 +61,12 @@ form {
   }
 }
 
-::ng-deep .p-dropdown-panel {
+::ng-deep .p-select-panel {
   background-color: #16182f;
   border: 1px solid settings.$bright-grey;
   border-radius: 6px;
 
-  .p-dropdown-items .p-dropdown-item {
+  .p-select-items .p-select-item {
     color: rgba(255, 255, 255, 0.87);
     font-weight: 500;
     transition: background-color 0.2s;

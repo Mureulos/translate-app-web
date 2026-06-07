@@ -1,11 +1,13 @@
 import {
-    HttpErrorResponse,
-    HttpEvent,
-    HttpHandlerFn,
-    HttpRequest,
+  HttpErrorResponse,
+  HttpEvent,
+  HttpHandlerFn,
+  HttpInterceptorFn,
+  HttpRequest,
 } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthService } from '../services/auth.service';
@@ -31,6 +33,25 @@ export function AuthInterceptor(request: HttpRequest<unknown>, next: HttpHandler
     }),
   );
 }
+
+export const errorInterceptor: HttpInterceptorFn = (req, next) => {
+  const messageService = inject(MessageService);
+
+  return next(req).pipe(
+    catchError((error: HttpErrorResponse) => {
+      if (error.status === 0) {
+        messageService.add({
+          severity: 'error',
+          summary: 'Servidor Offline',
+          detail: 'Não foi possível conectar à API. Verifique se o servidor está em execução.',
+          life: 6000
+        });
+      }
+
+      return throwError(() => error);
+    })
+  );
+};
 
 function addToken(request: HttpRequest<any>, token: string): HttpRequest<any> {
   return request.clone({

@@ -191,7 +191,7 @@
 
                   <div class="flex flex-col">
                     <label for="defaultLanguage">Default language</label>
-                    <p-dropdown
+                    <p-select
                       [options]="languages()"
                       optionLabel="name"
                       optionValue="id"
@@ -199,7 +199,7 @@
                       inputId="defaultLanguage"
                       formControlName="defaultLanguage"
                     >
-                    </p-dropdown>
+                    </p-select>
                   </div>
 
                   <button
