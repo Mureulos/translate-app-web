@@ -1,31 +1,81 @@
 <section
-  class="flex flex-col items-center gap-4 w-full overflow-y-auto overflow-x-hidden max-h-[800px] h-full pr-2"
+  class="flex flex-col gap-4 w-full h-full max-h-[800px] overflow-y-auto overflow-x-hidden pr-2 custom-scrollbar"
 >
-  @for (item of translationsSaved; track $index) {
+  @if (translationsSaved.length > 0) {
+    <div class="flex justify-between items-center w-full px-2 mb-2">
+      <h2 class="text-slate-200 font-semibold text-lg">
+        Translations saved
+      </h2>
+
+      <button
+        (click)="clearAllFavorites()"
+        class="flex items-center gap-2 text-sm text-iron hover:text-red-400 transition-colors px-3 py-1.5 rounded-md hover:bg-red-400/10"
+      >
+        Clear all
+      </button>
+    </div>
+  }
+
+  @for (item of translationsSaved; track item.id) {
     <div
-      class="container w-full glass-effect flex flex-col gap-2 shrink-0 !p-5"
+      class="translation-card w-full flex flex-col gap-3 p-5 rounded-xl border border-bright-grey/30 relative group transition-all"
     >
-      <div class="flex items-center justify-between mb-4">
-        <span
-          class="bg-sapphire text-periwinkle-blue p-2 rounded-full text-xs font-bold h-6 w-6 flex justify-center items-center"
+      <div class="absolute top-4 right-4 flex items-center gap-3">
+        <button
+          (click)="removeFromFavorites(item.id)"
+          class="text-iron hover:text-red-400 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100 focus:opacity-100"
+          title="Deletar tradução"
         >
-          {{ item.id }}
-        </span>
-
-        <button icon="pi pi-star-fill" (click)="removeFromFavorites(item.id)">
-          <mat-icon fontIcon="trash" class="text-xl text-[#d56e0c]"></mat-icon>
+          <mat-icon fontIcon="delete" class="text-xl"></mat-icon>
         </button>
-
-        <button icon="pi pi-star-fill" (click)="removeFromFavorites(item.id)">
-          <mat-icon fontIcon="star" class="text-xl text-[#d56e0c]"></mat-icon>
-        </button>
+        <mat-icon fontIcon="star" class="text-xl text-yellow-500"></mat-icon>
       </div>
 
-      <h1 class="text-xl font-bold text-wrap break-words">
-        {{ item.translationText }}
-      </h1>
-      <p class="text-wrap break-words italic text-primary">"{{ item.text }}"</p>
-      <span class="text-wrap break-words italic text-iron text-xs text-end">{{ item.createdAt | date:'short' }}</span>
+      <div class="pr-16">
+        <p class="text-iron text-sm mb-1">
+          {{ item.text }}
+        </p>
+        <h1 class="text-slate-200 text-lg font-medium break-words">
+          {{ item.translationText }}
+        </h1>
+      </div>
+
+      <div
+        class="flex items-center justify-between mt-2 pt-3 border-t border-bright-grey/20"
+      >
+        <span
+          class="bg-sapphire/30 text-periwinkle-blue px-2 py-0.5 rounded text-xs font-medium"
+        >
+          ID: {{ item.id }}
+        </span>
+        <span class="text-iron text-xs flex items-center gap-1">
+          <mat-icon
+            fontIcon="schedule"
+            class="text-[14px] w-[14px] h-[14px]"
+          ></mat-icon>
+          {{ item.createdAt | date: 'dd/MM/yyyy HH:mm' }}
+        </span>
+      </div>
+    </div>
+  } @empty {
+    <div
+      class="flex flex-col items-center justify-center w-full h-[400px] gap-4 text-iron glass-effect border border-bright-grey/20 rounded-xl p-8 text-center"
+    >
+      <div
+        class="w-20 h-20 bg-sapphire/20 rounded-full flex items-center justify-center mb-2"
+      >
+        <mat-icon
+          fontIcon="star_border"
+          class=" text-periwinkle-blue"
+        ></mat-icon>
+      </div>
+      <h2 class="text-xl font-semibold text-slate-200">
+        No translations saved
+      </h2>
+      <p class="max-w-[300px] text-sm">
+        The translations you mark with a star will appear here so you can refer
+        to them later.
+      </p>
     </div>
   }
 </section>

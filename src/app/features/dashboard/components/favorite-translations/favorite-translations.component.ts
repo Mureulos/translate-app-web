@@ -1,18 +1,20 @@
 import { DatePipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '@core/auth/services/auth.service';
 import { TranslationService } from '@core/services/translation.service';
-import { SaveTranslationDetail } from '@core/types/responses/save-translate-response.interfac';
+import { SaveTranslationDetail } from '@core/types/responses/save-translate-response.interface';
 import { MessageService } from 'primeng/api';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-favorite-translations',
+  standalone: true,
   imports: [MatIconModule, DatePipe],
   templateUrl: './favorite-translations.component.html',
   styleUrl: './favorite-translations.component.scss',
 })
-export class FavoriteTranslationsComponent {
+export class FavoriteTranslationsComponent implements OnInit {
   private _authService = inject(AuthService);
   private _translationService = inject(TranslationService);
   private _messageService = inject(MessageService);
@@ -28,13 +30,13 @@ export class FavoriteTranslationsComponent {
   private loadFavoriteTranslations(): void {
     this._translationService.getSavedTranslation().subscribe({
       next: (response) => {
-        this.translationsSaved = response.response;
+        this.translationsSaved = response.response || [];
       },
-      error: (error) => {
+      error: () => {
         this._messageService.add({
           severity: 'error',
-          summary: 'Error',
-          detail: 'Failed to load favorite translations',
+          summary: 'Erro',
+          detail: 'Falha ao carregar as traduções favoritas',
         });
       },
     });
@@ -45,18 +47,46 @@ export class FavoriteTranslationsComponent {
       next: () => {
         this._messageService.add({
           severity: 'success',
-          summary: 'Success',
-          detail: 'Translation removed from favorites',
+          summary: 'Sucesso',
+          detail: 'Tradução removida dos favoritos',
         });
-        this.loadFavoriteTranslations();
+        
+        this.translationsSaved = this.translationsSaved.filter(t => t.id !== translationId);
       },
-      error: (error) => {
+      error: () => {
         this._messageService.add({
           severity: 'error',
-          summary: 'Error',
-          detail: 'Failed to remove translation from favorites',
+          summary: 'Erro',
+          detail: 'Falha ao remover tradução dos favoritos',
         });
       },
+    });
+  }
+
+  public clearAllFavorites(): void {
+    if (this.translationsSaved.length === 0) return;
+
+    const deleteRequests = this.translationsSaved.map(t =>
+      this._translationService.deleteSavedTranslation(t.id)
+    );
+
+    forkJoin(deleteRequests).subscribe({
+      next: () => {
+        this._messageService.add({
+          severity: 'success',
+          summary: 'Sucesso',
+          detail: 'Todas as traduções foram removidas',
+        });
+        this.translationsSaved = [];
+      },
+      error: () => {
+        this._messageService.add({
+          severity: 'error',
+          summary: 'Erro',
+          detail: 'Falha ao remover algumas traduções',
+        });
+        this.loadFavoriteTranslations();
+      }
     });
   }
 }

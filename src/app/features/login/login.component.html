@@ -37,9 +37,12 @@
       [numScroll]="1"
       [circular]="false"
       [showNavigators]="false"
+      [showIndicators]="false"
+      [page]="activePage"
       class="w-full"
     >
       <ng-template let-screen pTemplate="item">
+        
         @if (screen === 1) {
           <div class="w-full h-full p-6 flex items-center justify-center">
             <main
@@ -88,19 +91,31 @@
 
                   <button
                     type="submit"
-                    class="btn__login py-3 px-5 gap-4 rounded-full text-center bg-sapphire"
+                    class="btn__login py-3 px-5 mt-2 gap-4 rounded-full text-center bg-sapphire text-white font-semibold"
                   >
                     Sign In
                   </button>
+
+                  <div class="text-center mt-2">
+                    <span class="text-sm text-iron">Don't have an account? </span>
+                    <button 
+                      type="button" 
+                      (click)="activePage = 1" 
+                      class="text-sm text-periwinkle-blue font-bold hover:underline"
+                    >
+                      Sign up
+                    </button>
+                  </div>
+
                 </div>
               </form>
 
               <footer class="absolute bottom-0 p-4 max-w-[310px]">
                 <p class="text-xs text-gray-400 text-center">
                   By continuing, you agree to devChallenges.io's
-                  <a href="#" class="text-periwinkle-blue">Terms of Service</a>
+                  <a href="#" class="text-periwinkle-blue hover:underline">Terms of Service</a>
                   and
-                  <a href="#" class="text-periwinkle-blue">Privacy Policy</a>.
+                  <a href="#" class="text-periwinkle-blue hover:underline">Privacy Policy</a>.
                 </p>
               </footer>
             </main>
@@ -204,19 +219,31 @@
 
                   <button
                     type="submit"
-                    class="btn__login py-3 px-5 gap-4 rounded-full text-center bg-sapphire"
+                    class="btn__login py-3 px-5 mt-2 gap-4 rounded-full text-center bg-sapphire text-white font-semibold"
                   >
                     Sign Up
                   </button>
+
+                  <div class="text-center mt-2">
+                    <span class="text-sm text-iron">Already have an account? </span>
+                    <button 
+                      type="button" 
+                      (click)="activePage = 0" 
+                      class="text-sm text-periwinkle-blue font-bold hover:underline"
+                    >
+                      Sign in
+                    </button>
+                  </div>
+
                 </form>
               </div>
 
               <footer class="bottom-0 p-4 max-w-[310px]">
                 <p class="text-xs text-gray-400 text-center">
                   By continuing, you agree to devChallenges.io's
-                  <a href="#" class="text-periwinkle-blue">Terms of Service</a>
+                  <a href="#" class="text-periwinkle-blue hover:underline">Terms of Service</a>
                   and
-                  <a href="#" class="text-periwinkle-blue">Privacy Policy</a>.
+                  <a href="#" class="text-periwinkle-blue hover:underline">Privacy Policy</a>.
                 </p>
               </footer>
             </main>

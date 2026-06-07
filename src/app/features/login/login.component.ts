@@ -58,6 +58,7 @@ export class LoginComponent {
   );
 
   public authScreens = [1, 2];
+  public activePage: number = 0;
 
   protected loginForm: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),

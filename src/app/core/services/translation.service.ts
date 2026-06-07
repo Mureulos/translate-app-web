@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { SaveTranslationResponse } from '@core/types/responses/save-translate-response.interfac';
+import { SaveTranslationResponse } from '@core/types/responses/save-translate-response.interface';
 import { Observable } from 'rxjs';
 import { API_URL } from '../tokens/api.token';
 import { TranslationResponse } from '../types/responses/translate-response.interface.ts';

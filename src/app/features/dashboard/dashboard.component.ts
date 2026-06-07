@@ -29,6 +29,7 @@ export class DashboardComponent {
   public targetLang = signal('fr');
   public translation: string = '';
   public dashboardScreens = [1, 2];
+  public activePage: number = 0;
 
   private _utilsService = inject(UtilsService);
   private _messageService = inject(MessageService);

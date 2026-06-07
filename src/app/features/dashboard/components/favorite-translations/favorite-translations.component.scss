@@ -1,5 +1,40 @@
 @use 'settings' as settings;
 
-.container {
-    background-color: #161a26c0;
+.glass-effect {
+  background-color: #161a26c0;
+}
+
+.bg-glass-effect {
+  background-color: #161a26c0;
+  backdrop-filter: blur(8px);
+}
+
+.translation-card {
+  background-color: #161a26c0;
+  backdrop-filter: blur(8px);
+
+  &:hover {
+    background-color: #1a1f2e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+  }
 }
