@@ -1,26 +1,46 @@
-# DevChallenge: Translate-app
+# 🌐 Translate App
 
-This is a front-end web application that enables users to translate text quickly and efficiently between multiple languages. The user inputs the text, selects the desired target language, and the application communicates with a translation API to display the translated result in real time. The interface is designed to be fast, intuitive, and responsive, ensuring an easy and seamless translation experience.
+![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![.NET](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/postgresql-4169e1?style=for-the-badge&logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
 
-## Technologies:
+Aplicação de tradução com front-end em Angular, API em .NET e tradução feita por um modelo de IA rodando localmente via Ollama. Usuários podem criar conta, fazer login e salvar traduções favoritas.
 
-- **Frontend:** Angular + Material Angular + TailwindCSS + [My memory API](https://mymemory.translated.net/doc/spec.php)
+O projeto tem duas branches:
 
-<img src="https://skillicons.dev/icons?i=angular,tailwind"/>
+- **`mvp`** — desafio original do [devChallenges.io](https://devchallenges.io/), focado em front-end com dados simulados no navegador
+- **`main`** — versão expandida com back-end, banco de dados, autenticação e IA integrada
 
-## **Project Checklist:**
+---
 
-### User stories:
+## 🛠️ Stack
 
-- [X] Create a translate application page that matches the given design.
-- [X] By default, it should translate 'Hello, how are you' to French.
-- [X] Users can change translating text with a maximum of 500 characters.
-- [X] Users can see the translated text after selecting the Translate button. Optionally, users can see updates in real-time and you use debounce or throttling to optimize the application.
-- [X] Users can choose different languages to translate from. They should see at least 3 options: Detect Language, English and French.
-- [X] Users can switch translation language and translated language.
-- [X] Users can have the option to listen to the translating and translated texts.
-- [X] Users can copy the translating and translated texts.
+**Front-end**
+- Angular 18 (Signals, Standalone Components)
+- Tailwind CSS, PrimeNG, Angular Material
+- RxJS
 
-## Thumbnail:
+**Back-end**
+- C# / .NET 8 Web API
+- Entity Framework Core
+- MediatR (CQRS)
+- OllamaSharp + modelo `translategemma:4b`
 
-![Thumbnail](/src/assets/img/jpg/thumbnail.jpg)
+**Infraestrutura**
+- Docker & Docker Compose
+- Nginx
+- PostgreSQL
+
+---
+
+## ⚙️ Rodando localmente
+
+Você precisa ter o **Docker** e o **Docker Compose** instalados.
+
+```bash
+git clone <link-do-repositorio>
+cd translate-app
+docker compose up
+```
